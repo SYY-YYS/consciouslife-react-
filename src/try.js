@@ -1,20 +1,25 @@
-function generateHashtag (str) {
-    // prevent empty string
-    let strArray = str.match(/\w+/ig)
-    if (strArray !== null) {
-      strArray = strArray.map(str => {
-      return str[0].toUpperCase() + str.slice(1, str.length)
-      })
-      // check if result longer than 140 chars
-      let joinedArray = strArray.join('');
-      if (joinedArray.length > 140-1) {
-        return false
-      } else {
-        return '#' + joinedArray;
-      }
+function queueTime(customers, n) {
+  //TODO
+  let till = [];
+  if (n >= customers.length) {
+    if (customers.length === 0) {
+      return 0;
     } else {
-      return false
+      return Math.max(...customers);
+    }
+  } else {
+    for (var i = 0; i < n; i++) {
+      till.push(customers[i])
     }
     
+    for (let j = i; j < customers.length; j++) {
+      let min = Math.min(...till);
+      let index = till.indexOf(min);
+      till[index] += customers[j]
+      console.log('after adding: ', till)
+    }
+    
+    return Math.max(...till)
   }
-console.log(generateHashtag('Do We have A Hashtag'))
+}
+console.log(queueTime([], 100))

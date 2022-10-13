@@ -48,3 +48,8 @@ button, input {
   border: 1px solid black;
   margin-top: 1vh;
 }
+@media (max-width: 1100px) {
+  .questionCenter {
+    flex-direction: column;
+  }
+}

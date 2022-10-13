@@ -6,11 +6,12 @@ function Form({setTimer}) {
     const [todolist, setTodolist, newid, setNewid, , setControlStopBtn] = useContext(TodoContext);
 
     // setTodolist 
-    // document.addEventListener('keydown', e=>{
-    //     if(e.key === 'Enter') {
-    //         submit();
-    //     };
-    // });
+    document.addEventListener('keydown', e=>{
+        if(e.key === 'Enter') {
+            // directly use submit() rendor more than once: dky
+            document.querySelector('#submit').click();
+        };
+    });
 
     function submit() {
         setControlStopBtn(true);
@@ -73,11 +74,13 @@ function Form({setTimer}) {
         <>
             <div className='questionCenter'>
                 <h1>wt are you going to do?</h1>
-                <input className='todo' type='text'/>
-                <button onClick={submit}>Submit</button>
+                <div className='input-area'>
+                    <input className='todo' type='text'/>
+                    <button id='submit' onClick={submit}>Submit</button>
+                </div>
             </div>
             <br></br>
-                {/* <p>(press 'Enter' to submit)</p> */}
+                <p>(press 'Enter' to submit)</p>
         </>
     );
 };
