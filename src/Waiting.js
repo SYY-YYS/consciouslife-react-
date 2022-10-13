@@ -41,9 +41,10 @@ const Waiting = ({timer}) => {
 
     return (
         <>
-            <h1>
-                You should be doing: {}
-            </h1>
+            { checkTodo && 
+                <h1>
+                    You should be doing: {document.querySelector('.todo').value}
+                </h1>}
             {controlStopBtn && <button onClick={recordTime}>Stop</button>}
         </>
     );

@@ -11,6 +11,9 @@ body {
   font-family: sans-serif;
   font-size: 20px;
 }
+.information {
+  font-size: 10px;
+}
 .title {
   color:hsl(240, 82%, 60%);
   font-size: 25px;
