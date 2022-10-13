@@ -76,7 +76,8 @@ function Form({setTimer}) {
                 <input className='todo' type='text'/>
                 <button onClick={submit}>Submit</button>
             </div>
-                <p>(press 'Enter' to submit) {newid}</p>
+            <br></br>
+                {/* <p>(press 'Enter' to submit)</p> */}
         </>
     );
 };
