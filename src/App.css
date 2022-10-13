@@ -11,6 +11,19 @@ body {
   font-family: sans-serif;
   font-size: 20px;
 }
+.clock {
+  font-size: 40px;
+  background-color: rgba(158, 255, 158, 0.719);
+  padding-top: 5px;
+  display: flex;
+  justify-content: center;
+}
+.clockDisplay {
+  background: linear-gradient(to bottom, rgb(224, 224, 224), rgb(85, 85, 85), rgba(176, 176, 176, 0.627));
+  width:fit-content;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .information {
   font-size: 10px;
 }

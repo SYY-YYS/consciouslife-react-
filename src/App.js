@@ -4,7 +4,7 @@ import Form from './form.js';
 import Show from './show.js';
 import { TodoProvider } from './TodoContext';
 import Waiting from './Waiting';
-
+import Clock from './Clock.js';
 
 // add
 // 0. useContext V
@@ -21,6 +21,7 @@ function App() {
 
   return (
     <TodoProvider>
+      <Clock />
       <div className='information'>
         <h2>
           <strong>Description:</strong><br />

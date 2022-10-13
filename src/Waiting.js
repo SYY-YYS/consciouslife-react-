@@ -8,7 +8,7 @@ const Waiting = ({timer}) => {
 
     function recordTime() {
         setControlStopBtn(false);
-        let timeUsed = (new Date().getTime() - timer)/1000;
+        let timeUsed = ((new Date().getTime() - timer)/60000).toFixed(0);
         let todo = document.querySelector('.todo').value;
         // wont change the state, try using setTodolist
         // todolist.forEach(obj => {
@@ -26,9 +26,9 @@ const Waiting = ({timer}) => {
             prevState = prevState.map(obj => {
                 if (obj.todo === todo) {
                     if (!obj.accumulatedTime) {
-                        return {id:obj.id, todo:obj.todo, accumulatedTime: ' +' + timeUsed + 's'};
+                        return {id:obj.id, todo:obj.todo, accumulatedTime: ' +' + timeUsed + 'min'};
                     } else {
-                        return {id:obj.id, todo:obj.todo, accumulatedTime: obj.accumulatedTime + ' +' + timeUsed + 's'};
+                        return {id:obj.id, todo:obj.todo, accumulatedTime: obj.accumulatedTime + ' +' + timeUsed + 'min'};
                     }
                 } else {
                     return obj
