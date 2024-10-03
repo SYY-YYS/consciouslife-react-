@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import { useState } from 'react';
 import Form from './form.js';
 import Show from './show.js';
