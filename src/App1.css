@@ -1,0 +1,13 @@
+.clock {
+    font-size: 30px;
+    /* background-color: rgba(158, 255, 158, 0.719); */
+    /* padding-top: 5px; */
+    display: flex;
+    justify-content: center;
+  }
+  .clockDisplay {
+    background: linear-gradient(to bottom, rgb(224, 224, 224), rgb(182, 182, 182), rgba(176, 176, 176, 0.627));
+    width:fit-content;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }

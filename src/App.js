@@ -1,10 +1,16 @@
-// import './App.css';
+import './App1.css';
 import { useState } from 'react';
 import Form from './form.js';
 import Show from './show.js';
 import { TodoProvider } from './TodoContext';
 import Waiting from './Waiting';
 import Clock from './Clock.js';
+
+import About from './about.js';
+import Home from './home.js';
+
+import SwipeableTemporaryDrawer from './SwipeableDrawer.js';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // add
 // 0. useContext V
@@ -21,27 +27,16 @@ function App() {
 
   return (
     <TodoProvider>
+      <SwipeableTemporaryDrawer />
       <Clock />
-      <div className='information'>
-        <h2>
-          <strong>Description:</strong><br />
-          This app aims to replicate a python app that the coder uses, which records time spent into an excel file (shown in coder's <a href='https://syy-yys.github.io/mywebpage/' target={'_blank'} rel="noreferrer">personal website</a>).<br />
-          Accumulated time of repeated items will be shown in same line.<br />
-          It won't save your records when you leave the page, so please just use it for daily records.<br />
-          <br />
-          <strong>How To Use:</strong>
-          <ol>
-            <li>1. Submit what you are going to do</li>
-            <li>2. Press 'Stop' button to record the time spent on what you were doing</li>
-          </ol>
-          <br />
-        </h2>
-      </div>
-      <div>
-        <Form setTimer={setTimer}/>
-        <Waiting timer={timer}/>
-        <Show timer={timer}/>
-      </div>
+      <Router>
+        <Routes>
+          <Route path='/' exact Component={<Home timer={timer} setTimer={setTimer}/>}></Route>
+          <Route path='/about' Component={<About />}></Route>
+          {/* <Route path='/' exact Component={<Home />}></Route> */}
+        </Routes>
+      </Router>
+      
     </TodoProvider>
   );
 }
