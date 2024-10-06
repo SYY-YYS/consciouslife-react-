@@ -16,6 +16,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import DomainVerificationIcon from '@mui/icons-material/DomainVerification';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import InfoIcon from '@mui/icons-material/Info';
+import { Link } from 'react-router-dom';
+
 
 
 export default function SwipeableTemporaryDrawer() {
@@ -51,39 +53,31 @@ export default function SwipeableTemporaryDrawer() {
     }
   }
 
+  
+
   const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
+    // <Box
+    //   sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+    //   role="presentation"
+    //   onClick={toggleDrawer(anchor, false)}
+    //   onKeyDown={toggleDrawer(anchor, false)}
+    // >
       <List>
         {['Home', 'Done Today', 'Data Analyze', 'About'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {renderIcon(index)}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+          <Link key={text} to={'/' + text.replaceAll(" ","")}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {renderIcon(index)}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
-      <Divider />
-      {/* <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List> */}
-    </Box>
+      // <Divider />
+    // </Box>
   );
 
   return (
@@ -91,7 +85,7 @@ export default function SwipeableTemporaryDrawer() {
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <div onClick={toggleDrawer(anchor, true)}>
-            <MenuIcon />
+            <MenuIcon id='menuBtn'/>
             </div>
           <SwipeableDrawer
             anchor={anchor}

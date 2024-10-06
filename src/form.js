@@ -71,17 +71,17 @@ function Form({setTimer}) {
         
     }
     return(
-        <>
-            <div className='questionCenter'>
-                <h1>wt are you going to do?</h1>
+        <div className='questionCenter'>
+            <div className='innerQCenter'>
+                <h1>ToDo</h1>
                 <div className='input-area'>
                     <input className='todo' type='text'/>
                     <button id='submit' onClick={submit}>Submit</button>
                 </div>
             </div>
-            <br></br>
-                <p>(press 'Enter' to submit)</p>
-        </>
+            
+            <p>(press 'Enter' to submit)</p>
+        </div>
     );
 };
 

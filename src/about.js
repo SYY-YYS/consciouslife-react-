@@ -1,10 +1,13 @@
+import SwipeableTemporaryDrawer from './SwipeableDrawer.js';
 
 
-
-export default function About(){
+function About(){
 
     return(
+        <>
+        
         <div className='information'>
+            <SwipeableTemporaryDrawer/>
             <h2>
             <strong>Description:</strong><br />
             This app aims to replicate a python app that the coder uses, which records time spent into an excel file (shown in coder's <a href='https://syy-yys.github.io/mywebpage/' target={'_blank'} rel="noreferrer">personal website</a>).<br />
@@ -14,5 +17,8 @@ export default function About(){
             <br />
             </h2>
         </div>
+        </>
     );
 }
+
+export default About;

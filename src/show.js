@@ -5,7 +5,7 @@ function Show() {
 
     const [todolist] = useContext(TodoContext);
     useEffect(()=>{
-        console.log('hi')
+        // console.log('hi')
     },[todolist])
 
     return(

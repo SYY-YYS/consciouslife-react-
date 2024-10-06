@@ -5,9 +5,30 @@
     display: flex;
     justify-content: center;
   }
-  .clockDisplay {
-    background: linear-gradient(to bottom, rgb(224, 224, 224), rgb(182, 182, 182), rgba(176, 176, 176, 0.627));
-    width:fit-content;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.clockDisplay {
+  background: linear-gradient(to bottom, rgb(224, 224, 224), rgb(182, 182, 182), rgba(176, 176, 176, 0.627));
+  width:fit-content;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#menuBtn {
+  position: fixed;
+  top: 3px;
+  left: 8px;
+  font-size: 50px;
+}
+.questionCenter {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.questionCenter div{
+  display:flex;
+  flex-direction: column;
+  
+}
+.innerQCenter {
+  min-width: 400px;
+  max-width: 500px;
+}

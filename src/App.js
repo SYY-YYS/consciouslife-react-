@@ -2,15 +2,18 @@ import './App1.css';
 import { useState } from 'react';
 import Form from './form.js';
 import Show from './show.js';
-import { TodoProvider } from './TodoContext';
 import Waiting from './Waiting';
+import { TodoProvider } from './TodoContext';
+
 import Clock from './Clock.js';
 
 import About from './about.js';
 import Home from './home.js';
+import DataAnalyze from './DataAnalyze.js';
+import DoneToday from './DoneToday.js';
 
-import SwipeableTemporaryDrawer from './SwipeableDrawer.js';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // add
 // 0. useContext V
@@ -27,16 +30,17 @@ function App() {
 
   return (
     <TodoProvider>
-      <SwipeableTemporaryDrawer />
+      
       <Clock />
       <Router>
         <Routes>
-          <Route path='/' exact Component={<Home timer={timer} setTimer={setTimer}/>}></Route>
-          <Route path='/about' Component={<About />}></Route>
-          {/* <Route path='/' exact Component={<Home />}></Route> */}
+          <Route path='/' element={<Home timer={timer} setTimer={setTimer}/>}></Route>
+          <Route path='/DoneToday' element={<DoneToday/>}></Route>
+          <Route path='/DataAnalyze' element={<DataAnalyze/>}></Route>
+          <Route path='/about' element={<About />}></Route>
+          <Route path='*' element={<Navigate to='/' />}></Route>
         </Routes>
       </Router>
-      
     </TodoProvider>
   );
 }
