@@ -1,8 +1,5 @@
 import './App1.css';
-import { useState } from 'react';
-import Form from './form.js';
-import Show from './show.js';
-import Waiting from './Waiting';
+import { useState } from 'react'; 
 import { TodoProvider } from './TodoContext';
 
 import Clock from './Clock.js';

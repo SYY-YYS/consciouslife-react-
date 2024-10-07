@@ -5,14 +5,14 @@ function Show() {
 
     const [todolist] = useContext(TodoContext);
     useEffect(()=>{
-        // console.log('hi')
+        console.log(todolist)
     },[todolist])
 
     return(
         <>
-        {
+        {todolist != undefined &&
             todolist.map((obj) => {
-                return <div key={obj.id} className='todos'>
+                return <div key={obj.todo} className='todos'>
                     {obj.todo + ' ' + 'accumulated time: ' + obj.accumulatedTime}
                     </div>
         })}
