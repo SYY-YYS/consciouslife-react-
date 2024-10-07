@@ -1,9 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import  { TodoContext } from './TodoContext';
+
+import FixedContainer from './Doing';
 
 function Form({setTimer}) {
 
-    const [todolist, setTodolist, newid, setNewid, , setControlStopBtn] = useContext(TodoContext);
+    const [todolist, setTodolist, newid, setNewid, , setControlStopBtn, todo, setTodo] = useContext(TodoContext);
+    const [startDoing, setStartDoing] = useState(false);
 
     // setTodolist 
     document.addEventListener('keydown', e=>{
@@ -17,7 +20,9 @@ function Form({setTimer}) {
         setControlStopBtn(true);
         setTimer(new Date().getTime());
 
-        let todo = document.querySelector('.todo').value;
+        setTodo(document.querySelector('.todo').value);
+        setStartDoing(true);
+
         // let checkList = todolist.filter(obj => {
         //     if (todo === obj.todo) {
         //         return true;
@@ -44,34 +49,35 @@ function Form({setTimer}) {
     // }
 
         // current error: newid always = 1 (wont if use cursor to click button)
-        setTodolist( prevState => {
-            const filterPrevState = prevState.filter(obj => {
-                if (obj.todo === todo) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            // if there is same
-            if (filterPrevState.length > 0) {
-                return prevState;
-            } else {
-                // if todolist = []
-                if (prevState.length === 0) {
-                    prevState = [{id: newid, todo: todo}]
-                } else {
-                    prevState = [...prevState, {todo: todo}];
-                    prevState[prevState.length-1].id = newid;
-                }
-                // setNewid works
-                setNewid(prev => prev + 1);
-            }
-            return prevState;
-        })
+        // setTodolist( prevState => {
+        //     const filterPrevState = prevState.filter(obj => {
+        //         if (obj.todo === todo) {
+        //             return true;
+        //         } else {
+        //             return false;
+        //         }
+        //     });
+        //     // if there is same
+        //     if (filterPrevState.length > 0) {
+        //         return prevState;
+        //     } else {
+        //         // if todolist = []
+        //         if (prevState.length === 0) {
+        //             prevState = [{id: newid, todo: todo}]
+        //         } else {
+        //             prevState = [...prevState, {todo: todo}];
+        //             prevState[prevState.length-1].id = newid;
+        //         }
+        //         // setNewid works
+        //         setNewid(prev => prev + 1);
+        //     }
+        //     return prevState;
+        // })
         
     }
     return(
         <div className='questionCenter'>
+            {startDoing && <FixedContainer setStartDoing={setStartDoing}/>}
             <div className='innerQCenter'>
                 <h1>ToDo</h1>
                 <div className='input-area'>

@@ -32,3 +32,34 @@
   min-width: 400px;
   max-width: 500px;
 }
+#popBg {
+  background-color: rgba(183, 183, 183, 0.744);
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#popDoing {
+  background-color: rgba(61, 61, 61, 0.497);
+  min-width: 500px;
+  min-height: 220px;
+  border-radius: 30px;
+}
+
+.align-btn button {
+  width: 200px;
+  position:absolute;
+}
+.align-btn button:last-child {
+  transform: translateX(300px);
+}
+
+#cancelIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 50px;
+}
