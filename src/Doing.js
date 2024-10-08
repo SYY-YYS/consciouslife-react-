@@ -24,7 +24,7 @@ export default function FixedContainer({timer, setStartDoing}) {
             let newState = prevState.map(obj => {
                 if (obj.todo === todo) {
                     changed = true;
-                    return {todo:obj.todo, startTime: obj.startTime, accumulatedTime: obj.accumulatedTime + timeUsed};
+                    return {todo:obj.todo, startTime: obj.startTime, accumulatedTime: parseInt(obj.accumulatedTime) + parseInt(timeUsed)};
                 } else {
                     return obj;
                 }

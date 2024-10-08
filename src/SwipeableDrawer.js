@@ -62,6 +62,7 @@ export default function SwipeableTemporaryDrawer() {
     //   onClick={toggleDrawer(anchor, false)}
     //   onKeyDown={toggleDrawer(anchor, false)}
     // >
+    <>
       <List>
         {['Home', 'Done Today', 'Data Analyze', 'About'].map((text, index) => (
           <Link key={text} to={'/' + text.replaceAll(" ","")}>
@@ -76,7 +77,9 @@ export default function SwipeableTemporaryDrawer() {
           </Link>
         ))}
       </List>
-      // <Divider />
+      {/* <Divider /> */}
+      <a href={'http://localhost:8010/login/google'}>Login with Google</a>
+      </>
     // </Box>
   );
 

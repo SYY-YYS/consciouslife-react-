@@ -19,6 +19,8 @@ export default function Home({setTimer,timer}){
         <div>
             <SwipeableTemporaryDrawer/>
             <Form timer={timer} setTimer={setTimer}/>
+
+            {/* just for development purpose */}
             <Show timer={timer}/>
         </div>
     );
