@@ -1,15 +1,10 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
@@ -18,9 +13,51 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import InfoIcon from '@mui/icons-material/Info';
 import { Link } from 'react-router-dom';
 
+import { TodoContext } from './TodoContext';
+import axios from 'axios';
 
 
 export default function SwipeableTemporaryDrawer() {
+
+  const [,,,,,,,,isLogin, setIsLogin] = React.useContext(TodoContext);
+
+  async function checkLogin() {
+    await axios.get(process.env.REACT_APP_Backend_Url + '/login', {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }})
+    .then((res) => {
+      console.log(res.data)
+        if (res.data === true) {
+            setIsLogin(true);
+        } else {
+          setIsLogin(false);
+        }
+    }).catch((err) =>{
+        console.log(err)
+    })
+  }
+
+  const logout = async () => {
+    await axios.post(process.env.REACT_APP_Backend_Url + '/logout', 
+      {withCredentials: true,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+    .then((res) => {
+      console.log(res.status)
+
+    }).catch((err) =>{
+        console.log(err)
+    })
+  }
+
+  React.useEffect(()=>{
+    checkLogin()
+  },[])
+
   const [state, setState] = React.useState({
     // top: false,
     left: false,
@@ -78,7 +115,11 @@ export default function SwipeableTemporaryDrawer() {
         ))}
       </List>
       {/* <Divider /> */}
-      <a href={'http://localhost:8010/login/google'}>Login with Google</a>
+      {isLogin && <button onClick={logout}>Logout</button>}
+      {!isLogin && 
+      <a href={process.env.REACT_APP_Backend_Url + '/login/google'}>
+        Login with Google
+      </a>}
       </>
     // </Box>
   );
