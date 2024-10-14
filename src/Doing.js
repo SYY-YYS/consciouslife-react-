@@ -1,7 +1,7 @@
 import * as React from 'react';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import  { TodoContext } from './TodoContext';
 
 export default function FixedContainer({timer, setStartDoing}) {
@@ -11,6 +11,13 @@ export default function FixedContainer({timer, setStartDoing}) {
     function discard(){
         setStartDoing(false)
     }
+    
+    // useEffect(()=>{
+    //     // add todolist to localstorage (wont disappear when refresh) 
+    //     // not working (only update when submit is clicked)
+    //     console.log(todolist)
+    //     localStorage.setItem("todolist", JSON.stringify(todolist))
+    // },[])
 
     function stopTime(){
         // time in second
@@ -22,26 +29,31 @@ export default function FixedContainer({timer, setStartDoing}) {
             let changed = false;
             
             let newState = prevState.map(obj => {
-                if (obj.todo === todo) {
+                if (obj.todo === todo && !obj.isUploaded) {
                     changed = true;
-                    return {todo:obj.todo, startTime: obj.startTime, accumulatedTime: parseInt(obj.accumulatedTime) + parseInt(timeUsed)};
+                    return {todo:obj.todo, startTime: obj.startTime, accumulatedTime: parseInt(obj.accumulatedTime) + parseInt(timeUsed), isUploaded: obj.isUploaded};
                 } else {
                     return obj;
                 }
             });
 
             if (changed) {
+                localStorage.setItem("todolist", JSON.stringify(newState))
                 return newState;
             } else {
                 // console.log("creating new obj")
 
-                return [...todolist,
+                
+                newState = [...todolist,
                     {
                         todo:todo, 
                         startTime: timer, 
-                        accumulatedTime: timeUsed
+                        accumulatedTime: parseInt(timeUsed),
+                        isUploaded: false
                     }]
-                }            
+                }
+                localStorage.setItem("todolist", JSON.stringify(newState)) 
+                return newState;           
         });
 
         setStartDoing(false);
