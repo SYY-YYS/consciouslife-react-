@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import  { TodoContext } from './TodoContext';
 
 import FixedContainer from './Doing';
@@ -21,12 +21,91 @@ function Form({timer, setTimer}) {
         if (todo === '') {
 
         } else {
-            setTimer(new Date().getTime());
-
+            // refresh shdnt cancel the start record
+            let Ltodolist = JSON.parse(localStorage.getItem("todolist"))
+            let currentTime = new Date().getTime()
+            
+            // shd filter if there is same todo
+            if (Ltodolist) {
+                let sameTodo = false;
+                Ltodolist = Ltodolist.map((obj, index) => {
+                    if (obj.todo === todo) {
+                        obj.startTime = currentTime;
+                        obj.Done = false;
+                        sameTodo = true
+                        return obj;
+                    }
+                    return obj;
+                })
+                console.log(Ltodolist)
+                if (sameTodo) {
+                    localStorage.setItem("todolist", JSON.stringify(Ltodolist))
+                    setTodolist(Ltodolist)
+                } else {
+                    localStorage.setItem("todolist", JSON.stringify(
+                        [...Ltodolist, {
+                            todo:todo, 
+                            startTime: currentTime, 
+                            accumulatedTime: 0,
+                            isUploaded: false
+                        }]
+                    ))
+                    setTodolist(prev => {
+                        return [...prev,
+                            {
+                                todo:todo, 
+                                startTime: currentTime, 
+                                accumulatedTime: 0,
+                                isUploaded: false
+                            }]
+                    })
+                }
+                
+            } else {
+                localStorage.setItem("todolist", JSON.stringify([
+                    {
+                        todo:todo, 
+                        startTime: currentTime, 
+                        accumulatedTime: 0,
+                        isUploaded: false
+                    }
+                ]))
+                setTodolist([
+                    {
+                        todo:todo, 
+                        startTime: currentTime, 
+                        accumulatedTime: 0,
+                        isUploaded: false
+                    }
+                ])
+            }
+            
+            
+            
+            setTimer(currentTime);
             setTodo(todo);
             setStartDoing(true);
         }
     }
+
+    // check if any processing todo
+    useEffect(() => {
+        let Ltodolist = JSON.parse(localStorage.getItem("todolist"));
+        console.log(Ltodolist, typeof(Ltodolist))
+        if (Ltodolist) {
+            Ltodolist.forEach((obj, index) => {
+                console.log("obj.Done: " + obj.Done)
+            if (!obj.Done) {
+                setStartDoing(true);
+                setTodo(obj.todo);
+                setTimer(obj.startTime);
+            }
+        })
+        }
+        
+    },[])
+    
+
     return(
         <div className='questionCenter'>
             {startDoing && <FixedContainer timer={timer} setStartDoing={setStartDoing}/>}

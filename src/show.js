@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import  { TodoContext } from './TodoContext';
 import axios from 'axios';
 
+import { convertTime } from './home';
+
 function Show() {
 
     const [todolist,setTodolist,,,,,,,isLogin] = useContext(TodoContext);
@@ -88,7 +90,7 @@ function Show() {
                 console.log("obj " + obj)
                 if (!obj.isUploaded) {
                     return <div id={obj.todo} key={obj.todo} className='todos'>
-                    {obj.todo + ' : ' + obj.accumulatedTime + ' s'}
+                    {obj.todo + ' : ' + convertTime(obj.accumulatedTime)}
                     <button onClick={upload}>upload</button>
                     </div>
                 }             

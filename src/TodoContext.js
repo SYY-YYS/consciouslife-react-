@@ -8,9 +8,11 @@ export const TodoProvider = (props) => {
     const [controlStopBtn, setControlStopBtn] = useState(false);
     const [todo, setTodo] = useState('');
     const [isLogin, setIsLogin] = useState(false);
+    const [sevenday, setSevenday] = useState([]);
+    const [itemstodate, setItemtodate] = useState([])
 
     return(
-        <TodoContext.Provider value={[todolist, setTodolist, newid, setNewid, controlStopBtn, setControlStopBtn, todo, setTodo, isLogin, setIsLogin]}>
+        <TodoContext.Provider value={[todolist, setTodolist, newid, setNewid, controlStopBtn, setControlStopBtn, todo, setTodo, isLogin, setIsLogin, sevenday, setSevenday, itemstodate, setItemtodate]}>
             {props.children}
         </TodoContext.Provider>
     );

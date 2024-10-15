@@ -63,3 +63,17 @@
   right: 0;
   font-size: 50px;
 }
+
+.dones {
+  background-color:aliceblue;
+  color: grey;
+  font-size: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.ResponsiveContainer {
+  text-align: center;
+}

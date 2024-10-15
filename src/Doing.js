@@ -9,6 +9,23 @@ export default function FixedContainer({timer, setStartDoing}) {
     const [todolist,setTodolist,,,,,todo] = useContext(TodoContext);
 
     function discard(){
+        setTodolist(prev => {
+            prev = prev.map((obj) => {
+                if (!obj.Done) {
+                    obj.Done = true;
+                }
+                return obj;
+            })
+            return prev;
+        })
+        let Ltodolist = JSON.parse(localStorage.getItem("todolist"));
+        Ltodolist = Ltodolist.map((obj) => {
+            if (!obj.Done) {
+                obj.Done = true;
+            }
+            return obj;
+        })
+        localStorage.setItem("todolist", JSON.stringify(Ltodolist))
         setStartDoing(false)
     }
     

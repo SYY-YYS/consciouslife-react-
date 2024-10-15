@@ -6,13 +6,13 @@ import axios from "axios";
 import SwipeableTemporaryDrawer from './SwipeableDrawer.js';
 
 
-function convertTime(timeInSeconds) {
+export function convertTime(timeInSeconds) {
     if (timeInSeconds < 60) {
-        return `${timeInSeconds} seconds`;
+        return `${timeInSeconds} s`;
     } else if (timeInSeconds < 3600) {
-        return `${(timeInSeconds / 60).toFixed(2)} minutes`;
+        return `${(timeInSeconds / 60).toFixed(2)} min`;
     } else {
-        return `${(timeInSeconds / 3600).toFixed(2)} hours`;
+        return `${(timeInSeconds / 3600).toFixed(2)} h`;
     }
 }
 
