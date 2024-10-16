@@ -52,11 +52,13 @@ export default function SwipeableTemporaryDrawer() {
     }).catch((err) =>{
         console.log(err)
     })
+    // temp solution self destroy cookie
+    localStorage.clear();
   }
 
   React.useEffect(()=>{
     checkLogin()
-  },[])
+  },[logout])
 
   const [state, setState] = React.useState({
     // top: false,
