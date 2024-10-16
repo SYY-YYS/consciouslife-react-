@@ -95,7 +95,7 @@ function Form({timer, setTimer}) {
         if (Ltodolist) {
             Ltodolist.forEach((obj, index) => {
                 console.log("obj.Done: " + obj.Done)
-            if (!obj.Done) {
+            if (!obj.Done && obj.Done !== undefined) {
                 setStartDoing(true);
                 setTodo(obj.todo);
                 setTimer(obj.startTime);
