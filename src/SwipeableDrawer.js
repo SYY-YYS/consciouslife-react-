@@ -12,6 +12,7 @@ import DomainVerificationIcon from '@mui/icons-material/DomainVerification';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import InfoIcon from '@mui/icons-material/Info';
 import { Link } from 'react-router-dom';
+import LoadingPage from './loading';
 
 import { TodoContext } from './TodoContext';
 import axios from 'axios';
@@ -19,9 +20,10 @@ import axios from 'axios';
 
 export default function SwipeableTemporaryDrawer() {
 
-  const [,,,,,,,,isLogin, setIsLogin] = React.useContext(TodoContext);
+  const [,,,,,,,,isLogin, setIsLogin,,,,,loading, setLoading] = React.useContext(TodoContext);
 
   async function checkLogin() {
+    setLoading(true)
     await axios.get(process.env.REACT_APP_Backend_Url + '/login', {
       withCredentials: true,
       headers: {
@@ -37,6 +39,7 @@ export default function SwipeableTemporaryDrawer() {
     }).catch((err) =>{
         console.log(err)
     })
+    setLoading(false)
   }
 
   const logout = async () => {
@@ -52,13 +55,13 @@ export default function SwipeableTemporaryDrawer() {
     }).catch((err) =>{
         console.log(err)
     })
-    // temp solution self destroy cookie
+    // temp solution self destroy cookie (o.. cant destroy cookie actually)
     localStorage.clear();
   }
 
   React.useEffect(()=>{
     checkLogin()
-  },[logout])
+  },[])
 
   const [state, setState] = React.useState({
     // top: false,
@@ -128,6 +131,7 @@ export default function SwipeableTemporaryDrawer() {
 
   return (
     <div>
+      {loading && <LoadingPage text={'Loading...'}/>}
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <div onClick={toggleDrawer(anchor, true)}>
