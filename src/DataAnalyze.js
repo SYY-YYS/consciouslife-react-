@@ -6,37 +6,54 @@ import React, { PureComponent, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { TodoContext } from './TodoContext.js';
 
+
+export function parseDate(dateString) {
+  const parts = dateString.split('-');
+  // parts[0] is day, parts[1] is month, parts[2] is year
+  return new Date(parts[0], parts[1] - 1, parts[2]); // Month is 0-indexed
+}
+
+// transforming data according to dates
+export function transformData(input, dayswithin) {
+  const result = {};
+
+  // Iterate through the input array
+  input.forEach(item => {
+      // Iterate through each key in the object
+      for (const key in item) {
+          const dates = item[key];
+
+          // Iterate through each date in the nested object
+          for (const date in dates) {
+            let currentD = new Date();
+              // filtered 7 days before
+              if (parseDate(date) >= new Date(currentD.getFullYear(), currentD.getMonth() , currentD.getDate() - dayswithin)) {
+                // If the date is not already in the result, initialize it
+                if (!result[date]) {
+                    result[date] = { name: date };
+                }
+                // Add the item name and its value to the corresponding date
+                
+                  result[date][key] = dates[date];
+              }
+          }
+      }
+  });
+
+  // Convert the result object into an array and sort by date
+  const data = Object.values(result).sort((a, b) => new Date(a.name) - new Date(b.name));
+
+  return data;
+}
+
 export default function DataAnalyze(){
 
   const [,,,,,,,,isLogin,,sevenday,setSevenday, itemstodate, setItemtodate] = useContext(TodoContext);
 
-  // transforming data according to dates
-      function transformData(input) {
-        const result = {};
+
+  
+  
     
-        // Iterate through the input array
-        input.forEach(item => {
-            // Iterate through each key in the object
-            for (const key in item) {
-                const dates = item[key];
-    
-                // Iterate through each date in the nested object
-                for (const date in dates) {
-                    // If the date is not already in the result, initialize it
-                    if (!result[date]) {
-                        result[date] = { name: date };
-                    }
-                    // Add the item name and its value to the corresponding date
-                    result[date][key] = dates[date];
-                }
-            }
-        });
-    
-        // Convert the result object into an array and sort by date
-        const data = Object.values(result).sort((a, b) => new Date(a.name) - new Date(b.name));
-    
-        return data;
-    }
 
 
     function getRandomColor() {
@@ -66,12 +83,12 @@ export default function DataAnalyze(){
         }
     ).then((res) => {
         console.log(res.status, res.data)
-        console.log(transformData(res.data))
+        console.log(transformData(res.data, 7))
         // saving the data in localstorage as "7days"
         localStorage.setItem("itemtodate", JSON.stringify(res.data))
-        localStorage.setItem("7days", JSON.stringify(transformData(res.data)))
+        localStorage.setItem("7days", JSON.stringify(transformData(res.data, 7)))
         setItemtodate(res.data)
-        setSevenday(transformData(res.data))
+        setSevenday(transformData(res.data, 7))
     }).catch((err) =>{
         console.log(err)
         // show previous loaded if cant load

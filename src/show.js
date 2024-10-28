@@ -3,10 +3,11 @@ import  { TodoContext } from './TodoContext';
 import axios from 'axios';
 
 import { convertTime } from './home';
+import LoadingPage from './loading';
 
 function Show() {
 
-    const [todolist,setTodolist,,,,,,,isLogin] = useContext(TodoContext);
+    const [todolist,setTodolist,,,,,,,isLogin,,,,,,loading, setLoading] = useContext(TodoContext);
     const [response, setResponse] = useState("")
 
     useEffect(()=>{
@@ -38,6 +39,7 @@ function Show() {
     
 
     async function upload(e){
+        
         console.log(e.target.parentElement.id)
         let todoIndex = todolist.findIndex(item => item.todo === e.target.parentElement.id);
         let startTime = todolist[todoIndex].startTime;
@@ -51,6 +53,7 @@ function Show() {
         console.log(dataSending);
 
         if (isLogin) {
+            setLoading(true)
             await axios.post(process.env.REACT_APP_Backend_Url + '/update', dataSending, {
                 withCredentials: true,
                 headers: {
@@ -71,14 +74,16 @@ function Show() {
                     localStorage.setItem("todolist", JSON.stringify(Ltodolist))
                     setTodolist(Ltodolist)
                     setResponse('Updated')
-                }
+                } 
+                setLoading(false)
 
             }).catch((err) => {
                 console.log(err)
+                setLoading(false)
             })
         } else {
             setResponse('Please first login')
-        }
+        } 
         
     }
 

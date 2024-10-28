@@ -22,4 +22,8 @@ function queueTime(customers, n) {
     return Math.max(...till)
   }
 }
-console.log(queueTime([], 100))
+let currentD = new Date()
+console.log(currentD.getDate())
+let d = new Date(currentD.getFullYear(), currentD.getMonth() , currentD.getDate() - 1)
+console.log(d, new Date(2024,9,25))
+console.log(d < new Date(2024,9,25))

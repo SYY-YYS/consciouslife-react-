@@ -3,6 +3,7 @@ import  { TodoContext } from './TodoContext';
 
 import FixedContainer from './Doing';
 
+
 function Form({timer, setTimer}) {
 
     const [todolist, setTodolist, newid, setNewid, , setControlStopBtn, todo, setTodo] = useContext(TodoContext);
@@ -107,6 +108,7 @@ function Form({timer, setTimer}) {
     
 
     return(
+        
         <div className='questionCenter'>
             {startDoing && <FixedContainer timer={timer} setStartDoing={setStartDoing}/>}
             <div className='innerQCenter'>

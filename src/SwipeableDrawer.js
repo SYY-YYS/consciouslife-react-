@@ -131,7 +131,7 @@ export default function SwipeableTemporaryDrawer() {
 
   return (
     <div>
-      {loading && <LoadingPage text={'Loading...'}/>}
+      {loading && <LoadingPage text={'Loading...\nfirst load may take longer time'}/>}
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <div onClick={toggleDrawer(anchor, true)}>
